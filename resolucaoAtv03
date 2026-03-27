@@ -1,0 +1,107 @@
+# Letra A
+
+from stack import Stack
+
+def is_balanced(expression):
+    """
+    Verifica se a expressão possui parênteses balanceados.
+    Usa a pilha implementada em stack.py.
+    """
+    pilha = Stack()
+
+    pares = {')': '(', ']': '[', '}': '{'}
+    aberturas = set('([{')
+    
+    for char in expression:
+        if char in aberturas:
+            pilha.push(char)
+        elif char in pares:
+            if pilha.is_empty() or pilha.pop() != pares[char]:
+                return False
+    
+    return pilha.is_empty()
+
+
+
+print(is_balanced("[{}(2+2)]{}")) 
+print(is_balanced("[{}(2+2))]{}")) 
+print(is_balanced("[{}])")) 
+
+print(" ")
+print(is_balanced(""))                         
+print(is_balanced("()"))                      
+print(is_balanced("({[]})"))                   
+print(is_balanced("{[()()]()}"))               
+print(is_balanced("if (a[0] > b) { return c; }")) 
+
+print(" ")
+print(is_balanced("("))                       
+print(is_balanced("]"))                       
+print(is_balanced("({[)]}"))                 
+print(is_balanced("{[(()]}"))                  
+print(is_balanced("((()))]"))
+
+
+
+# Letra B
+
+
+
+from stack import Stack
+
+if __name__ == "__main__":
+    main_stack = Stack()
+    min_stack = Stack()
+
+    def push_aux(data):
+         main_stack.push(data)
+
+    if min_stack.is_empty() or data <= min_stack.peek():
+            min_stack.push(data)
+
+    def pop_aux():
+      data = main_stack.pop()
+        
+    if data == min_stack.peek():
+            min_stack.pop()
+    return data
+
+    def get_min():
+      
+     return min_stack.peek()
+
+    
+    print("\nEmpilhando: 5, 3, 7, 2, 8")
+    push_aux(5)
+    print(f"Min atual: {get_min()}")
+
+    push_aux(3)
+    print(f"Min atual: {get_min()}")
+
+    push_aux(7)
+    print(f"Min atual: {get_min()}")
+
+    push_aux(2)
+    print(f"Min atual: {get_min()}")
+
+    push_aux(8)
+    print(f"Min atual: {get_min()}")
+
+    print("\nDesempilhando e mostrando o mínimo:")
+    pop_aux()
+    print(f"Min atual: {get_min()}")
+
+    pop_aux()
+    print(f"Min atual: {get_min()}")
+
+    pop_aux()
+    print(f"Min atual: {get_min()}")
+
+    pop_aux()
+    print(f"Min atual: {get_min()}")
+
+    pop_aux()
+    try:
+        print(get_min())
+    except IndexError as e:
+        print(f"Erro esperado: {e}")
